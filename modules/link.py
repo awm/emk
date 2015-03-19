@@ -1022,7 +1022,7 @@ class Module(object):
         cxx_flags = self.cxx.local_flags + self.cxx.flags + self.cxx.local_libflags + self.cxx.libflags
 
         abs_libs = self._local_static_libs | self._static_libs
-        syslibs = set(self.local_syslibs) | set(self.syslibs)
+        syslibs = self.local_syslibs if self.local_syslibs else self.syslibs
         lib_paths = self._syslib_paths | self._local_syslib_paths
         link_cxx = self.link_cxx
         
@@ -1038,7 +1038,7 @@ class Module(object):
             if cache._static_libpath:
                 abs_libs.add(os.path.join(d, cache._static_libpath))
             abs_libs |= cache._static_libs
-            syslibs |= set(cache.syslibs)
+            syslibs += cache.syslibs
             lib_paths |= cache._syslib_paths
             link_cxx = link_cxx or cache.link_cxx
         
@@ -1066,7 +1066,7 @@ class Module(object):
         abs_libs = self._local_static_libs | self._static_libs
         if self._static_libpath:
             abs_libs.add(emk.abspath(self._static_libpath))
-        syslibs = set(self.local_syslibs) | set(self.syslibs)
+        syslibs = self.local_syslibs if self.local_syslibs else self.syslibs
         lib_paths = self._syslib_paths | self._local_syslib_paths
         link_cxx = self.link_cxx
         
@@ -1082,7 +1082,7 @@ class Module(object):
             if cache._static_libpath:
                 abs_libs.add(os.path.join(d, cache._static_libpath))
             abs_libs |= cache._static_libs
-            syslibs |= set(cache.syslibs)
+            syslibs += cache.syslibs
             lib_paths |= cache._syslib_paths
             link_cxx = link_cxx or cache.link_cxx
         
