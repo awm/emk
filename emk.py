@@ -1613,15 +1613,15 @@ class EMK_Base(object):
     
     def _trace_changed_str(self, s):
         if self._options["style"] == "no":
-            return '*' + s + '*'
+            return '*' + str(s) + '*'
         else:
-            return _style_tag('red') + s + _style_tag('')
+            return _style_tag('red') + str(s) + _style_tag('')
     
     def _trace_unknown_str(self, s):
         if self._options["style"] == "no":
-            return '(' + s + ')'
+            return '(' + str(s) + ')'
         else:
-            return _style_tag('blue') + s + _style_tag('')
+            return _style_tag('blue') + str(s) + _style_tag('')
     
     def _trace_helper(self, rule, visited, to_visit):
         if not rule:
