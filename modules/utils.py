@@ -268,7 +268,7 @@ class Module(object):
                     that rule will be executed before the copy rule is).
           dest   -- The path to copy the file to; must include the destination file name (ie not just the directory).
         """
-        emk.rule(self.copy_file, dest, [source, emk.ALWAYS_BUILD], cwd_safe=True, ex_safe=True)
+        emk.rule(self.copy_file, dest, source, cwd_safe=True, ex_safe=True)
     
     def copy_file(self, produces, requires):
         """
